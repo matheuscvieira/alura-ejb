@@ -21,7 +21,8 @@ public class AutorBean {
 		return autor;
 	}
 	
-	public void cadastra() {
+	//public void cadastra() throws LivrariaException {
+	public void cadastra(){
 		this.service.adiciona(autor);
 		this.autor = new Autor();
 	}

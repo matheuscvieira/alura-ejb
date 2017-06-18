@@ -20,11 +20,16 @@ public class AutorService {
 	AutorDao dao;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void adiciona(Autor autor){
+	//public void adiciona(Autor autor) throws LivrariaException{
+	public void adiciona(Autor autor) {
 		//mais regras de negócio aqui
 		dao.salva(autor);
 		//Mudar a TX do método salva para REQUIRES_NEW para isolar sua execução deste método
 		//throw new RuntimeException("[ERRO] Erro lançado para testar o rollback da transação.");
+		
+		//uma regra de negócio deu erro
+		//throw new LivrariaException();
+		
 	}
 
 	//required

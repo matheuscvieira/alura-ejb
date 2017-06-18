@@ -16,6 +16,7 @@ import br.com.caelum.livraria.modelo.Autor;
 @Stateless   //javax.ejb
 //@TransactionManagement(TransactionManagementType.BEAN) // BMT - Bean Managed Transaction - devemos usar explicitamente o begin() e commit()
 @TransactionManagement(TransactionManagementType.CONTAINER)  //opcional, pois já é o default para SessionBean - // CMT - Container Managed Transaction
+//@Interceptors({LogInterceptador.class})
 public class AutorDao {
 
 	@PersistenceContext
@@ -37,6 +38,7 @@ public class AutorDao {
 	// o container a utiliza para executar o método, entretanto, caso nenhuma tarnsação esteja aberta, o container irá criar uma nova transação para processar o método
 	public void salva(Autor autor) {
 		
+		long millis = System.currentTimeMillis();
 		System.out.println("Salvando Autor " + autor.getNome());
 		
 //		try {
@@ -52,6 +54,12 @@ public class AutorDao {
 		//manager.getTransaction().commit();
 		
 		System.out.println("Salvou Autor " + autor.getNome());
+		
+		//chamada ao service externo que gera um erro
+		
+		//throw new RuntimeException("Serviço externo deu erro");
+		
+		System.out.println("Tempo gasto: " + (System.currentTimeMillis() - millis));
 	}
 	
 	public List<Autor> todosAutores() {
